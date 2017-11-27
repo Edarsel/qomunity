@@ -25,6 +25,9 @@ class Project extends CI_Controller {
 	
 	public function add()
 	{
+		$this->load->helper('form');
+		$this->load->view('templates/header');
 		$this->load->view('pages/project/add');
+		$this->load->view('templates/footer');
 	}
 }
