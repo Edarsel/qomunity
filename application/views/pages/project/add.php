@@ -2,8 +2,9 @@
 
 <?php 
 echo form_open();
-echo form_input('name', null, ['placeholder' => 'Name']);
-echo form_textarea('description', null, ['placeholder' => 'Description']);
+echo form_input('name', $project->name, ['placeholder' => 'Name']);
+echo form_textarea('description', $project->description, ['placeholder' => 'Description']);
 echo form_submit('submit', 'Add');
+echo validation_errors();
 echo form_close();
 ?>
