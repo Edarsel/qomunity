@@ -25,6 +25,6 @@ class Project extends CI_Controller {
 	
 	public function add()
 	{
-		
+		$this->load->view('pages/project/add');
 	}
 }
