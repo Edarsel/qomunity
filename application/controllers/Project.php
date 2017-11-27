@@ -35,4 +35,12 @@ class Project extends CI_Controller {
 		$this->load->view('pages/project/add', compact('project'));
 		$this->load->view('templates/footer');
 	}
+	
+	public function view($id)
+	{
+		$project = $this->project_model->get($id);
+		$this->load->view('templates/header');
+		$this->load->view('pages/project/view', compact('project'));
+		$this->load->view('templates/footer');
+	}
 }
