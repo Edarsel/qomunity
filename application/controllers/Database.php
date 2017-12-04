@@ -22,26 +22,47 @@ class Database extends CI_Controller {
 		$this->dbforge->drop_table('users', true);
 		$this->dbforge->add_field("id");
 		$this->dbforge->add_field([
-			'email' => 'VARCHAR',
-			'constraint' => 255
+			'email' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
 		],
-			'name' => 'VARCHAR',
-			'constraint' => 255
+			'name' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
 		],
-			'password' => 'VARCHAR',
-			'constraint' => 255
+			'password' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
 		],
-			'num_group' => 'INTEGER',	// Référence au champ 'id' de la table role
-			'constraint' => 1
+			'num_group' => [
+				'type' => 'INTEGER',	// Référence au champ 'id' de la table role
+				'constraint' => 1
+		],
+			'num_rank' => [
+				'type' => 'INTEGER',
+				'constraint' => 2
+		]
 		]);
 		$this->dbforge->create_table('users');
 
-		$this->dbforge->drop_table('group', true);
+		$this->dbforge->drop_table('groups', true);
 		$this->dbforge->add_field('id');
 		$this->dbforge->add_field([
-			'name' => 'VARCHAR',
-			'constraint' => 255
-		])
-		$this->dbforge->create_table('group');
+			'name' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
+		]
+		]);
+		$this->dbforge->create_table('groups');
+
+		$this->dbforge->drop_table('ranks', true);
+		$this->dbforge->add_field('id');
+		$this->dbforge->add_field([
+			'name' => [
+				'type' => 'VARCHAR',
+				'constraint' => 40
+		]
+	]);
+	$this->dbforge->create_table('ranks');
 	}
 }
