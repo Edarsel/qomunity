@@ -89,7 +89,7 @@ class Database extends CI_Controller {
 			'num_forum_group' => [
 				'type' => 'INT'
 			],
-			'num_users' => [
+			'num_user' => [
 				'type' => 'INT'
 			],
 			'date' => [
