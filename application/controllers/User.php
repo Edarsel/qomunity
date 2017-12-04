@@ -7,7 +7,7 @@ class User extends CI_Controller {
     parent::__construct();
 
     // Load database
-    $this->load->model('project_model');
+    $this->load->model('User_model');
   }
 
   // Show login page
@@ -21,10 +21,10 @@ class User extends CI_Controller {
 
   // Show registration page
   public function registration() {
-    $this->new_user_registration();
-    
+    $dataRegistration = $this->new_user_registration();
+
     $this->load->view('templates/header');
-    $this->load->view('pages/user/registration');
+    $this->load->view('pages/user/registration',compact('dataRegistration'));
     $this->load->view('templates/footer');
   }
 
@@ -56,41 +56,30 @@ class User extends CI_Controller {
         //$this->load->view('pages/user/registration', $dataRegistration);
       }
     }
+
+    return $dataRegistration;
+
   }
 
   // Check for user login process
   public function user_login_process() {
 
-    $this->form_validation->set_rules('username', 'Username', 'trim|required');
+    $this->form_validation->set_rules('email', 'Email', 'trim|required');
     $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
-    if ($this->form_validation->run() == FALSE) {
-        //$this->load->view('pages/user/login');
-    } else {
+    if ($this->form_validation->run()) {
+
       $dataLogin = (object)[];
-  		$dataLogin->user_name = trim($this->input->post('username'));
+      $dataLogin->user_name = trim($this->input->post('email'));
       $dataLogin->user_password = trim($this->input->post('password'));
 
-      /*$dataLogin = array(
-        'username' => $this->input->post('username'),
-        'password' => $this->input->post('password')
-      );*/
+      $user = $this->User_model->login($dataLogin);
 
-      $result = $this->project_model->login($dataLogin);
-      if ($result == TRUE) {
+      $this->session->set_userdata('logged_in', $user);
+      $this->load->view('nom de la page à afficher'); //Définir la page à afficher après la connexion
 
-        $username = $this->input->post('username');
-        $result = $this->project_model->read_user_information($username);
-        if ($result != false) {
-          $session_data = array(
-            'username' => $result[0]->name,
-            'email' => $result[0]->email,
-          );
-          // Add user data in session
-          $this->session->set_userdata('logged_in', $session_data);
-          $this->load->view('nom de la page à afficher'); //Définir la page à afficher après la connexion
-        }
-      } else {
+    } else {
+
         $dataLogin->message_display = 'Invalid Username or Password';
         /*$data = array(
           'error_message' => 'Invalid Username or Password'
