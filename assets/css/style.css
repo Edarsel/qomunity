@@ -1,0 +1,72 @@
+header h1
+{
+    font-weight: bolder;
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+body
+{
+    font-family: 'Roboto', sans-serif;
+}
+header
+{
+    background-color: #005794;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+}
+main div
+{
+}
+main
+{
+    border: inset #98A1EF;
+    /*+border-radius: 2px;*/
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    border-radius: 2px;
+    padding: 10px;
+    margin: 10px 0 0;
+    text-align: justify;
+}
+main h2
+{
+    font-weight: bolder;
+    border-radius: 2px;
+    background: rgba(43, 62, 222, 0.487);
+    padding: 0 0 0 10px;
+}
+nav
+{
+    font-family: 'Roboto', sans-serif;
+}
+#onglets li
+{
+    padding: 10px;
+    list-style-type: none;
+    float: left;
+}
+nav a
+{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+nav a:hover{
+    text-decoration: underline;
+}
+
+main form button[type=submit]
+{
+    padding:5px 15px;
+       background:rgba(43, 62, 222, 0.487);
+       margin-top: 10px;
+       border:0 none;
+       cursor:pointer;
+       -webkit-border-radius: 5px;
+       border-radius: 5px;
+}
