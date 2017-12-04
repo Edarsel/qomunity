@@ -12,5 +12,6 @@ class User_model extends CI_Model {
 
     public function add($user){
       $this->db->insert(self::TABLE, $user);
+      return $this->db->insert_id();
     }
 }
