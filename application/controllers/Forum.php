@@ -19,10 +19,10 @@ class Forum extends CI_Controller
         $forum->name = trim($this->input->post('name'));
         $forum->description = trim($this->input->post('description'));
 
-        $this->form_validation->set_rules('name', 'Name', 'trim|required|min_length[4]|max_length[50]|unique[forum_group.name]');
+        $this->form_validation->set_rules('name', 'Name', 'trim|required|min_length[4]|max_length[50]|is_unique[forum_group.name]');
         $this->form_validation->set_rules('description', 'Description', 'trim|max_length[255]');
         if ($this->form_validation->run()) {
-            $id = $this->forum_group_model->add($forum_group);
+            $id = $this->forum_group_model->add($forum);
 			redirect(['forum', 'view', $id]);
         }
 
@@ -30,7 +30,7 @@ class Forum extends CI_Controller
         $this->load->view('pages/forum/add', compact('forum'));
         $this->load->view('templates/footer');
     }
-    //  
+    //
     public function view($id){
         $groups = $this->forum_group_model->get_all();
         $list = $this->load->view('pages/forum/_list', compact('groups'), true);
