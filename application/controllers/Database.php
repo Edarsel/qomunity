@@ -45,7 +45,7 @@ class Database extends CI_Controller {
 		]);
 		$this->dbforge->create_table('users');
 
-		$this->dbforge->drop_table('groups', true);
+		$this->dbforge->drop_table('usersGroups', true);
 		$this->dbforge->add_field('id');
 		$this->dbforge->add_field([
 			'name' => [
@@ -53,7 +53,7 @@ class Database extends CI_Controller {
 				'constraint' => 255
 		]
 		]);
-		$this->dbforge->create_table('groups');
+		$this->dbforge->create_table('usersGroups');
 
 		$this->dbforge->drop_table('ranks', true);
 		$this->dbforge->add_field('id');
