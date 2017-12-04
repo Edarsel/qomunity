@@ -37,7 +37,7 @@ class Database extends CI_Controller {
 				'type' => 'VARCHAR',
 				'constraint' => 255
 		],
-			'name' => [
+			'username' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255
 		],
@@ -140,7 +140,6 @@ class Database extends CI_Controller {
 
 		// Table 'ranks'
 		$data = array(
-		 ,
 		        'name' => 'Débutant'
 		);
 
@@ -169,15 +168,5 @@ class Database extends CI_Controller {
 		);
 
 		$this->db->insert('ranks', $data);
-
-		$data = array(
-						'email' => 'test@domain.com',
-						'name' => 'Jacky Chan',
-						'password' => '',
-						'num_usersGroup' => 3,
-						'num_ranks' => 1
-		);
-
-		$this->db->insert('users', $data);
 	}
 }

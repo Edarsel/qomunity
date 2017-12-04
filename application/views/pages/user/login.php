@@ -1,3 +1,4 @@
+<h1>Qomunity - Connexion</h1>
 <?php
 echo form_open();
 echo form_input('email','' ,['placeholder' => 'Adresse mail']);

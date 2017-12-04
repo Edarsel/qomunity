@@ -18,18 +18,19 @@ class User extends CI_Controller {
     $this->load->helper('form');
     $this->load->library('form_validation');
 
-    $user = (object)[];
-    $user->email = trim($this->input->post('email'));
-    $user->username = trim($this->input->post('username'));
-    $user->password = trim($this->input->post('password'));
+    $email = $this->input->post('email');
+    $username = $this->input->post('username');
+    $password = $this->input->post('password');
 
     $this->form_validation->set_rules('email', 'Adresse email', 'trim|required');
     $this->form_validation->set_rules('username', 'Utilisateur', 'trim|required');
     $this->form_validation->set_rules('password', 'Mot de passe', 'trim|required');
 
+    $userInfo = array('email'=>$email, 'username'=>$username,'password'=>password_hash($password, PASSWORD_DEFAULT), 'num_usersGroups'=>1,'num_ranks'=>1);
+
     if($this->form_validation->run())
     {
-      $id = $this->user_model->add($user);
+      $id = $this->user_model->add($userInfo);
       redirect(['user', 'view', $id]);
     }
 
