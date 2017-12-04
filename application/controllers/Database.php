@@ -6,9 +6,11 @@ class Database extends CI_Controller {
 	public function init()
 	{
 		$this->project();
-		$this->forum();
+		$this->forum_group();
+		$this->forum_message();
+		$this->user();
 	}
-	public function project()
+	private function project()
 	{
 		$this->load->dbforge();
 		$this->dbforge->drop_table('project', true);
@@ -25,7 +27,42 @@ class Database extends CI_Controller {
 		$this->dbforge->create_table('project');
 	}
 
-	public function forum_group()
+	private function user()
+	{
+		$this->dbforge->drop_table('users', true);
+		$this->dbforge->add_field("id");
+		$this->dbforge->add_field([
+			'email' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
+		],
+			'name' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
+		],
+			'password' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
+		],
+			'num_group' => [
+				'type' => 'INTEGER',	// Référence au champ 'id' de la table role
+				'constraint' => 1
+		]
+		]);
+		$this->dbforge->create_table('users');
+
+		$this->dbforge->drop_table('group', true);
+		$this->dbforge->add_field('id');
+		$this->dbforge->add_field([
+			'name' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
+		]
+		]);
+		$this->dbforge->create_table('group');
+	}
+
+	private function forum_group()
 	{
 		$this->load->dbforge();
 		$this->dbforge->drop_table('forum_group', true);
@@ -43,7 +80,7 @@ class Database extends CI_Controller {
 		$this->dbforge->create_table('forum_group');
 	}
 
-	public function forum_message()
+	private function forum_message()
 	{
 		$this->load->dbforge();
 		$this->dbforge->drop_table('forum_message', true);
