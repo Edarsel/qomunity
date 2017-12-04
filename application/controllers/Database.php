@@ -9,6 +9,7 @@ class Database extends CI_Controller {
 		$this->forum_group();
 		$this->forum_message();
 		$this->user();
+		$this->populate();
 	}
 	private function project()
 	{
@@ -116,6 +117,64 @@ class Database extends CI_Controller {
 		$this->dbforge->create_table('forum_message');
 	}
 
+	private function populate(){
 
+		// Table 'usersGroups'
+		$data = array(
+		        'id' => 1,
+		        'name' => 'Utitilsateur'
+		);
 
+		$this->db->insert('usersGroups', $data);
+
+		$data = array(
+		        'id' => 2,
+		        'name' => 'Modérateur'
+		);
+
+		$this->db->insert('usersGroups', $data);
+
+		$data = array(
+		        'id' => 3,
+		        'name' => 'Administrateur'
+		);
+
+		$this->db->insert('usersGroups', $data);
+
+		// Table 'ranks'
+		$data = array(
+		        'id' => 1,
+		        'name' => 'Débutant'
+		);
+
+		$this->db->insert('ranks', $data);
+
+		$data = array(
+						'id' => 2,
+						'name' => 'Connaisseur'
+		);
+
+		$this->db->insert('ranks', $data);
+
+		$data = array(
+						'id' => 3,
+						'name' => 'Avancé'
+		);
+
+		$this->db->insert('ranks', $data);
+
+		$data = array(
+						'id' => 4,
+						'name' => 'Expert'
+		);
+
+		$this->db->insert('ranks', $data);
+
+		$data = array(
+						'id' => 5,
+						'name' => 'Grand Expert'
+		);
+
+		$this->db->insert('ranks', $data);
+	}
 }
