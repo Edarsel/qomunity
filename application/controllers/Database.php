@@ -5,6 +5,11 @@ class Database extends CI_Controller {
 
 	public function init()
 	{
+		$this->project();
+		$this->forum();
+	}
+	public function project()
+	{
 		$this->load->dbforge();
 		$this->dbforge->drop_table('project', true);
 		$this->dbforge->add_field('id');
@@ -18,5 +23,10 @@ class Database extends CI_Controller {
 			]
 		]);
 		$this->dbforge->create_table('project');
+	}
+
+	public function forum($value='')
+	{
+		
 	}
 }
