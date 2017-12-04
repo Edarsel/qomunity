@@ -18,5 +18,37 @@ class Database extends CI_Controller {
 			]
 		]);
 		$this->dbforge->create_table('project');
+
+		$this->dbforge->drop_table('users', true);
+		$this->dbforge->add_field("id");
+		$this->dbforge->add_field([
+			'email' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
+		],
+			'name' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
+		],
+			'password' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
+		],
+			'num_group' => [
+				'type' => 'INTEGER',	// Référence au champ 'id' de la table role
+				'constraint' => 1
+		]
+		]);
+		$this->dbforge->create_table('users');
+
+		$this->dbforge->drop_table('group', true);
+		$this->dbforge->add_field('id');
+		$this->dbforge->add_field([
+			'name' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
+		]
+		]);
+		$this->dbforge->create_table('group');
 	}
 }
