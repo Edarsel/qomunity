@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Qommunity</title>
+<title>Qomunity</title>
 <meta charset="utf-8">
 </head>
 
