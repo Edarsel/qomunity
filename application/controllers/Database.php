@@ -45,11 +45,11 @@ class Database extends CI_Controller {
 				'type' => 'VARCHAR',
 				'constraint' => 255
 		],
-			'num_group' => [
+			'num_usersGroups' => [
 				'type' => 'INTEGER',	// Référence au champ 'id' de la table role
 				'constraint' => 1
 		],
-			'num_rank' => [
+			'num_ranks' => [
 				'type' => 'INTEGER',
 				'constraint' => 2
 		]
@@ -104,7 +104,7 @@ class Database extends CI_Controller {
 			'num_forum_group' => [
 				'type' => 'INT'
 			],
-			'num_user' => [
+			'num_usersGroups' => [
 				'type' => 'INT'
 			],
 			'date' => [
@@ -121,21 +121,18 @@ class Database extends CI_Controller {
 
 		// Table 'usersGroups'
 		$data = array(
-		        'id' => 1,
 		        'name' => 'Utitilsateur'
 		);
 
 		$this->db->insert('usersGroups', $data);
 
 		$data = array(
-		        'id' => 2,
 		        'name' => 'Modérateur'
 		);
 
 		$this->db->insert('usersGroups', $data);
 
 		$data = array(
-		        'id' => 3,
 		        'name' => 'Administrateur'
 		);
 
@@ -143,38 +140,44 @@ class Database extends CI_Controller {
 
 		// Table 'ranks'
 		$data = array(
-		        'id' => 1,
+		 ,
 		        'name' => 'Débutant'
 		);
 
 		$this->db->insert('ranks', $data);
 
 		$data = array(
-						'id' => 2,
 						'name' => 'Connaisseur'
 		);
 
 		$this->db->insert('ranks', $data);
 
 		$data = array(
-						'id' => 3,
 						'name' => 'Avancé'
 		);
 
 		$this->db->insert('ranks', $data);
 
 		$data = array(
-						'id' => 4,
 						'name' => 'Expert'
 		);
 
 		$this->db->insert('ranks', $data);
 
 		$data = array(
-						'id' => 5,
 						'name' => 'Grand Expert'
 		);
 
 		$this->db->insert('ranks', $data);
+
+		$data = array(
+						'email' => 'test@domain.com',
+						'name' => 'Jacky Chan',
+						'password' => '',
+						'num_usersGroup' => 3,
+						'num_ranks' => 1
+		);
+
+		$this->db->insert('users', $data);
 	}
 }
