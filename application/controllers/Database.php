@@ -9,6 +9,7 @@ class Database extends CI_Controller {
 		$this->forum_group();
 		$this->forum_message();
 		$this->user();
+		$this->populate();
 	}
 	private function project()
 	{
@@ -47,11 +48,15 @@ class Database extends CI_Controller {
 			'num_group' => [
 				'type' => 'INTEGER',	// Référence au champ 'id' de la table role
 				'constraint' => 1
+		],
+			'num_rank' => [
+				'type' => 'INTEGER',
+				'constraint' => 2
 		]
 		]);
 		$this->dbforge->create_table('users');
 
-		$this->dbforge->drop_table('group', true);
+		$this->dbforge->drop_table('usersGroups', true);
 		$this->dbforge->add_field('id');
 		$this->dbforge->add_field([
 			'name' => [
@@ -59,7 +64,17 @@ class Database extends CI_Controller {
 				'constraint' => 255
 		]
 		]);
-		$this->dbforge->create_table('group');
+		$this->dbforge->create_table('usersGroups');
+
+		$this->dbforge->drop_table('ranks', true);
+		$this->dbforge->add_field('id');
+		$this->dbforge->add_field([
+			'name' => [
+				'type' => 'VARCHAR',
+				'constraint' => 40
+		]
+	]);
+	$this->dbforge->create_table('ranks');
 	}
 
 	private function forum_group()
@@ -102,6 +117,64 @@ class Database extends CI_Controller {
 		$this->dbforge->create_table('forum_message');
 	}
 
+	private function populate(){
 
+		// Table 'usersGroups'
+		$data = array(
+		        'id' => 1,
+		        'name' => 'Utitilsateur'
+		);
 
+		$this->db->insert('usersGroups', $data);
+
+		$data = array(
+		        'id' => 2,
+		        'name' => 'Modérateur'
+		);
+
+		$this->db->insert('usersGroups', $data);
+
+		$data = array(
+		        'id' => 3,
+		        'name' => 'Administrateur'
+		);
+
+		$this->db->insert('usersGroups', $data);
+
+		// Table 'ranks'
+		$data = array(
+		        'id' => 1,
+		        'name' => 'Débutant'
+		);
+
+		$this->db->insert('ranks', $data);
+
+		$data = array(
+						'id' => 2,
+						'name' => 'Connaisseur'
+		);
+
+		$this->db->insert('ranks', $data);
+
+		$data = array(
+						'id' => 3,
+						'name' => 'Avancé'
+		);
+
+		$this->db->insert('ranks', $data);
+
+		$data = array(
+						'id' => 4,
+						'name' => 'Expert'
+		);
+
+		$this->db->insert('ranks', $data);
+
+		$data = array(
+						'id' => 5,
+						'name' => 'Grand Expert'
+		);
+
+		$this->db->insert('ranks', $data);
+	}
 }
