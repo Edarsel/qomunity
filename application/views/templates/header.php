@@ -5,9 +5,9 @@
 <title>Forum</title>
     <meta charset="utf-8">
     <link rel = "stylesheet" type = "text/css" href="<?= css_url('style.css') ?>">
-    <link rel = "stylesheet" type = "text/css" href="../../../assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <script src=" script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
