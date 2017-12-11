@@ -1,0 +1,22 @@
+.forum_container{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    display: flex;
+
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+#forum_header{
+    width: 100%;
+}
+
+#forum_list_groups{
+    width: 20%;
+}
+
+#forum_messages{
+    width: 80%;
+}
