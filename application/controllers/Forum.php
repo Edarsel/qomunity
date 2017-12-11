@@ -30,7 +30,7 @@ class Forum extends CI_Controller
         $this->load->view('pages/forum/add', compact('forum'));
         $this->load->view('templates/footer');
     }
-    //  
+    // chargement de la listes et des groupes et affichage de celle-ci
     public function view($id){
         $groups = $this->forum_group_model->get_all();
         $list = $this->load->view('pages/forum/_list', compact('groups'), true);
@@ -40,7 +40,7 @@ class Forum extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    //
+    // ajout et lecture des messages en java script
     public function send_message(){
         if (!$this->input->is_ajax_request()) {
             show_404();
