@@ -89,11 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-<<<<<<< HEAD
-$autoload['helper'] = array('url', 'security');
-=======
-$autoload['helper'] = array('url', 'assets');
->>>>>>> PicchiEv/master
+$autoload['helper'] = array('url', 'security', 'assets');
 
 /*
 | -------------------------------------------------------------------
