@@ -59,11 +59,11 @@ class User extends CI_Controller {
     {
       if(isset($this->session->userdata['logged_in']))
       {
-        $this->load->view('profile');
+        $this->load->view('pages/user/profile', compact('user'));
       }
       else
       {
-        $this->load->view('login');
+        $this->load->view('pages/user/login', compact('user'));
       }
     }
     else
@@ -89,7 +89,7 @@ class User extends CI_Controller {
         );
 
         $this->session->set_userdata('logged_in', $session_data);
-        $this->load->view('profile');
+        $this->load->view('pages/user/profile', compact('user'));
       }
     }
     else
