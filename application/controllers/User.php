@@ -14,6 +14,16 @@ class User extends CI_Controller {
     $this->load->view('welcome_message');
   }
 
+  public function profile()
+  {
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+
+    $this->load->view('templates/header');
+    $this->load->view('pages/user/profile', compact('user'));
+    $this->load->view('templates/footer');
+  }
+
   public function add()
   {
     $this->load->helper('form');
