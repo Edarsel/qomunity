@@ -101,10 +101,14 @@ class Database extends CI_Controller {
 		$this->dbforge->drop_table('forum_message', true);
 		$this->dbforge->add_field('id');
 		$this->dbforge->add_field([
-			'num_forum_group' => [
+			'num_forum_group' => [ #foreign key
 				'type' => 'INT'
 			],
+<<<<<<< HEAD
 			'num_usersGroups' => [
+=======
+			'num_user' => [ #foreign key
+>>>>>>> becaudar/master
 				'type' => 'INT'
 			],
 			'date' => [

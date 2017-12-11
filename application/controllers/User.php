@@ -26,7 +26,7 @@ class User extends CI_Controller {
         if ($this->form_validation->run() == FALSE)
         {
             // fails
-            $this->load->view('pages/user/registration_new');
+            $this->load->view('pages/user/registration');
         }
         else
         {
@@ -51,9 +51,12 @@ class User extends CI_Controller {
             {
                 // error
                 $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>');
-                redirect('pages/user/registration_2');
+                redirect('pages/user/registration');
             }
         }
+
+        $this->load->view('templates/header');
+  			$this->load->view('templates/footer');
     }
 
     public function login() {
