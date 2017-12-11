@@ -7,7 +7,7 @@
     <link rel = "stylesheet" type = "text/css" href="<?= css_url('style.css') ?>">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="script.js" defer></script>
+    <!-- TODO: ajouter après le merge du helper assets: <script src="forum.js" defer></script> -->
 </head>
 <body>
     <header>
