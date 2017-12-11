@@ -126,13 +126,6 @@ class Database extends CI_Controller {
 			'num_forum_group' => [ #foreign key
 				'type' => 'INT'
 			],
-<<<<<<< HEAD
-			'num_usersGroups' => [
-=======
-			'num_user' => [ #foreign key
->>>>>>> becaudar/master
-				'type' => 'INT'
-			],
 			'date' => [
 				'type' => 'DATE'
 			],

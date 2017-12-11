@@ -68,9 +68,11 @@ class User extends CI_Controller {
 
       $id = $this->user_model->add($userInfo);
 
-      $user = $this->user_model->get_user($user_id);
+      $user = $this->user_model->get_user($id);
       $_SESSION['user'] = $user;
 
+      //Change le status de l'utilisateur en déconnecté
+      $this->user_model->update_user_status($id,1);
       redirect(['user', 'profile']);
     }
   }
@@ -113,6 +115,8 @@ class User extends CI_Controller {
         $_SESSION['user'] = $user;
 
         // user login ok
+        //Change le status de l'utilisateur en déconnecté
+        $this->user_model->update_user_status($user_id,1);
         redirect(['user', 'profile']);
       }
       else
@@ -134,6 +138,8 @@ class User extends CI_Controller {
 
   public function disconnect()
   {
+    //Change le status de l'utilisateur en déconnecté
+    $this->user_model->update_user_status($_SESSION['user']->id,2);
     //DETRUIT LA VARIABLE DE SESSION => PLUS D'UTILISATEUR CONNECTE
     unset($_SESSION['user']);
   }
