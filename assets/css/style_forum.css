@@ -1,4 +1,4 @@
-.forum_container{
+#forum_container{
     padding: 0;
     margin: 0;
     list-style: none;
@@ -15,8 +15,37 @@
 
 #forum_list_groups{
     width: 20%;
+    text-align: center;
 }
 
 #forum_messages{
-    width: 80%;
+    width: 79%;
+}
+
+#forum_messages h2{
+    text-align: center;
+}
+
+#forum_group_container{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    display: flex;
+
+    flex-flow: column wrap;
+    justify-content: space-around;
+}
+
+#forum_group_container li{
+    user-select: none;
+}
+
+#forum_group_container li:hover{
+    background-color: lightgray;
+}
+
+#forum_group_container li:active{
+    background-color: darkgray;
+    color: white;
 }
