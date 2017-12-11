@@ -14,8 +14,35 @@ class User extends CI_Controller {
     $this->load->view('welcome_message');
   }
 
+  public function profile()
+  {
+    if ($this->isConnected()){
+      $this->load->view('templates/header');
+      $this->load->view('pages/user/profile');
+      $this->load->view('templates/footer');
+    }else{
+      redirect(['user', 'login']);
+    }
+
+  }
+
+  public function isConnected()
+  {
+    $isConnected = false;
+
+    //SI LA VARIABLE DE SESSION EXISTE => UN UTILISATEUR EST CONNECTE
+    if ($this->session->has_userdata('user')){
+      $isConnected = true;
+    }
+    return $isConnected;
+  }
+
   function add()
   {
+    $userinfo = (object)[];
+    $userinfo->username = trim($this->input->post('username'));
+		$userinfo->email = trim($this->input->post('email'));
+
     // set form validation rules
     $this->form_validation->set_rules('username', 'Username','trim|required');
     $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
@@ -26,7 +53,9 @@ class User extends CI_Controller {
     if ($this->form_validation->run() == FALSE)
     {
       // fails
-      $this->load->view('pages/user/registration_new');
+      $this->load->view('templates/header');
+      $this->load->view('pages/user/registration',compact('userinfo'));
+      $this->load->view('templates/footer');
     }
     else
     {
@@ -37,22 +66,12 @@ class User extends CI_Controller {
 
       $userInfo = array('username'=>$username, 'email'=>$email,'password'=>password_hash($password, PASSWORD_DEFAULT), 'num_usersGroups'=>1,'num_ranks'=>1);
 
-      {
-        $id = $this->user_model->add($userInfo);
-        redirect(['user', 'profile', $id]);
-      }
+      $id = $this->user_model->add($userInfo);
 
-      if ($this->user_model->insert_user($data))
-      {
-        $this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered! Please login to access your Profile!</div>');
-        redirect('pages/user/profile');
-      }
-      else
-      {
-        // error
-        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>');
-        redirect('pages/user/registration_2');
-      }
+      $user = $this->user_model->get_user($user_id);
+      $_SESSION['user'] = $user;
+
+      redirect(['user', 'profile']);
     }
   }
 
@@ -65,6 +84,9 @@ class User extends CI_Controller {
     $this->load->helper('form');
     $this->load->library('form_validation');
 
+    $userinfo = (object)[];
+		$userinfo->email = trim($this->input->post('email'));
+
     // set validation rules
     $this->form_validation->set_rules("email", "Email-ID", "trim|required|xss_clean");
     $this->form_validation->set_rules("password", "Password", "trim|required|xss_clean");
@@ -73,7 +95,7 @@ class User extends CI_Controller {
 
       // validation not ok, send validation errors to the view
       $this->load->view('templates/header');
-      $this->load->view('pages/user/login');
+      $this->load->view('pages/user/login',compact('userinfo'));
       $this->load->view('templates/footer');
 
     } else {
@@ -85,33 +107,34 @@ class User extends CI_Controller {
       if ($this->user_model->resolve_user_login($email, $password)) {
 
         $user_id = $this->user_model->get_user_id_from_username($email);
-        $user    = $this->user_model->get_user($user_id);
-
-        //var_dump($user);
+        $user = $this->user_model->get_user($user_id);
 
         // set session user datas
-        $_SESSION['user']               = $user;
-
-        echo 'Connexion réussie';
+        $_SESSION['user'] = $user;
 
         // user login ok
-        $this->load->view('templates/header');
-        $this->load->view('pages/user/profile', $data);
-        $this->load->view('templates/footer');
-
+        redirect(['user', 'profile']);
       }
       else
       {
-
         // login failed
         $data->error = 'Wrong username or password.';
 
         // send error to the view
         $this->load->view('templates/header');
-        $this->load->view('pages/user/login', $data);
+        $this->load->view('pages/user/login', compact('userinfo'));
         $this->load->view('templates/footer');
 
       }
     }
+  }
+
+
+
+
+  public function disconnect()
+  {
+    //DETRUIT LA VARIABLE DE SESSION => PLUS D'UTILISATEUR CONNECTE
+    unset($_SESSION['user']);
   }
 }

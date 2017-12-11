@@ -2,14 +2,13 @@
 
 
 <div>
-  <?php echo img('images/picture.jpg'); ?>
-  <h2><?php echo xss_clean($user->username); ?></h2>
+  <?php //echo img('images/picture.jpg'); ?>
+  <h3><?php echo xss_clean($_SESSION['user']->username); ?></h3>
   <p>
   	<?php
-    echo xss_clean($user->username);
-    echo xss_clean($user->email);
-    echo xss_clean($user->biography);
-    //Ajouter le rang et le groupe 
+    echo xss_clean($_SESSION['user']->email);
+    echo xss_clean($_SESSION['user']->biography);
+    //Ajouter le rang et le groupe
     ?>
   </p>
 </div>
