@@ -15,9 +15,4 @@ echo validation_errors();
 echo form_close();
 ?>
 
-<?php
-echo form_open('user/register');
-echo form_submit('submit', 'Se créer un compte');
-echo validation_errors();
-echo form_close();
-?>
+<a href="<?php echo site_url('user/register/'); ?>">Se créer un compte</a>
