@@ -138,7 +138,7 @@ class Database extends CI_Controller {
 
 	private function populate(){
 
-		// Table 'usersGroups'
+		// Table 'usersGroups' ======================================================
 		$data = array(
 			'name' => 'Utilisateur'
 		);
@@ -157,7 +157,7 @@ class Database extends CI_Controller {
 
 		$this->db->insert('usersGroups', $data);
 
-		// Table 'ranks'
+		// Table 'ranks' =================================================================
 		$data = array(
 			'name' => 'Débutant'
 		);
@@ -188,7 +188,9 @@ class Database extends CI_Controller {
 
 		$this->db->insert('ranks', $data);
 
-		//INSERT pour la table status
+
+		//INSERT pour la table status ==========================================================
+
 		$data = array(
 			'name' => 'Connecté'
 		);
@@ -212,5 +214,18 @@ class Database extends CI_Controller {
 		);
 
 		$this->db->insert('status', $data);
+
+
+		//INSERT pour la table status ==========================================================
+		$data = array(
+			'email' => 'admin@admin.com',
+			'username' => 'admin@admin.com',
+			'password' => '$2y$10$MCZpP447qkHT2Zdh03uXvepx/roJ/T7qVH76UVM.TIsFwCIJVi/Iu',
+			'num_usersGroups' => '3',
+			'num_ranks' => '5',
+			'num_status' => '2'
+		);
+
+		$this->db->insert('users', $data);
 	}
 }
