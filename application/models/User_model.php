@@ -36,10 +36,12 @@ class User_model extends CI_Model {
   }
 
   public function get_user($user_id) {
-
+    $this->db->select('users.id, email, username, biography, profilepict, num_usersGroups, num_ranks, num_status, status.name AS status_name, ranks.name AS rank_name, usersgroups.name AS usergroup_name');
     $this->db->from('users');
-    $this->db->from('status');
-    $this->db->join('user_status', 'users.num_status = status.id');
+    //$this->db->from('status');
+    $this->db->join('status', 'users.num_status = status.id');
+    $this->db->join('ranks', 'users.num_ranks = ranks.id');
+    $this->db->join('usersgroups', 'users.num_usersGroups = usersgroups.id');
     $this->db->where('users.id', $user_id);
     return $this->db->get()->row();
 
@@ -48,6 +50,15 @@ class User_model extends CI_Model {
   public function update_user_status($user_id,$id_status) {
 
     $data = array('num_status' => $id_status);
+
+    $this->db->where('id', $user_id);
+    return $this->db->update('users', $data);
+
+  }
+
+  public function update_user_profile($user_id,$profilepict, $biography) {
+
+    $data = array('profilepict' => $profilepict, 'biography' => $biography);
 
     $this->db->where('id', $user_id);
     return $this->db->update('users', $data);

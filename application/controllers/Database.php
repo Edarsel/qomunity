@@ -140,7 +140,7 @@ class Database extends CI_Controller {
 
 		// Table 'usersGroups'
 		$data = array(
-			'name' => 'Utitilsateur'
+			'name' => 'Utilisateur'
 		);
 
 		$this->db->insert('usersGroups', $data);
