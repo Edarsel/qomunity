@@ -12,10 +12,19 @@
 
  <?php
  echo form_open('user/save_profile');
+ echo form_label("Image de profil : ", 'profilpict');
  echo form_input('profilepict', xss_clean($this->session->userdata('user')->profilepict) ,['placeholder' => 'URL de l\'image de profil']);
  //echo form_input('email', xss_clean($this->session->userdata('user')->email) ,['placeholder' => 'Adresse mail']);
+ echo form_label("Biographie : ", 'biography');
  echo form_textarea('biography', xss_clean($this->session->userdata('user')->biography) ,['placeholder' => 'Biographie']);
  echo form_submit('submit', 'Enregistrer');
+ echo validation_errors();
+ echo form_close();
+ ?>
+
+ <?php
+ echo form_open('user/profile');
+ echo form_submit('submit', 'Annuler');
  echo validation_errors();
  echo form_close();
  ?>

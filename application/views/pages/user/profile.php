@@ -9,7 +9,7 @@
   <img src="<?php echo xss_clean($this->session->userdata('user')->profilepict) ?>" alt="Image de profil" height="200" width="200" />
   <p>
     <h3><?php echo xss_clean($this->session->userdata('user')->username); ?></h3>
-    <?php echo "  " . xss_clean($this->session->userdata('user')->usergroup_name); ?>
+    <?php echo "Groupe : " . xss_clean($this->session->userdata('user')->usergroup_name); ?>
   </p>
   <p>
   	<?php

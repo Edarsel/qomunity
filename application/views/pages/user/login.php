@@ -6,9 +6,11 @@
 
 <?php
 echo form_open('user/login');
+echo form_label("Adresse email : ", 'email');
 echo form_input('email', $userinfo->email ,['placeholder' => 'Adresse mail']);
+echo form_label("Mot de passe : ", 'password');
 echo form_password('password', '',['placeholder' => 'Mot de passe']);
-echo form_submit('submit', 'Login');
+echo form_submit('submit', 'Se connecter');
 echo validation_errors();
 echo form_close();
 ?>

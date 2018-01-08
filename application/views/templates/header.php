@@ -13,8 +13,8 @@
     <header>
         <h1>Qomunity</h1>
         <nav>
-            <a href="">Page0</a>
-            <a href="">Page1</a>
+            <a href="<?php echo site_url('user/disconnect/'); ?>">Se déconnecter</a>
+            <a href="<?php echo site_url('user/profile/'); ?>">Mon profil</a>
             <a href="">Page2</a>
             <a href="">Page3</a>
             <a href="">Page4</a>
