@@ -29,3 +29,5 @@ echo form_submit('submit', 'Modifier profil');
 echo validation_errors();
 echo form_close();
 ?>
+
+<a href="<?php echo site_url('user/reset_password/'); ?>">Changer mot de passe</a>

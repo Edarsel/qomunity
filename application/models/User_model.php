@@ -65,6 +65,15 @@ class User_model extends CI_Model {
 
   }
 
+  public function reset_password($user_id,$password) {
+
+    $data = array('password' => $password);
+
+    $this->db->where('id', $user_id);
+    return $this->db->update('users', $data);
+
+  }
+
   private function hash_password($password) {
 
     return password_hash($password, PASSWORD_BCRYPT);

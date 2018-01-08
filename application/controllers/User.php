@@ -223,4 +223,41 @@ class User extends CI_Controller {
     }
   }
 
+  function reset_password()
+  {
+    if ($this->isConnected()){
+      $userinfo = (object)[];
+
+      $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[cpassword]');
+      $this->form_validation->set_rules('cpassword', 'Check password', 'trim|required');
+
+      // submit
+      if ($this->form_validation->run() == FALSE)
+      {
+        // fails
+        $this->load->view('templates/header');
+        $this->load->view('pages/user/reset_pwd',compact('userinfo'));
+        $this->load->view('templates/footer');
+      }
+      else
+      {
+
+        $password = $this->input->post('password');
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        $this->user_model->reset_password($this->session->userdata('user')->id,$password);
+
+        $user = $this->user_model->get_user($this->session->userdata('user')->id);
+        $this->session->set_userdata('user',$user);
+
+        redirect(['user', 'profile']);
+      }
+    }
+    else {
+      //Redirige vers la page login si user n'est pas connecté
+      redirect(['user', 'login']);
+    }
+  }
+
 }
