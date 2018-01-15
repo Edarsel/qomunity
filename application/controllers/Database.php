@@ -28,7 +28,8 @@ class Database extends CI_Controller {
 				'type' => 'TEXT'
 			],
 			'num_user'=>[
-				'type' =>'INT'
+				'type' =>'INT',
+				'NULL'=>FALSE
 			]
 		]);
 		$this->dbforge->create_table('project');
