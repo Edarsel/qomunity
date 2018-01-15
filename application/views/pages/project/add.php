@@ -1,10 +1,14 @@
-<h1>Add Project</h1>
 
+<<<<<<< HEAD
+=======
+<h2>Add a Project</h2>
+>>>>>>> master
 <?php
 echo form_open();
-echo form_input('name', $project->name, ['placeholder' => 'Name']);
-echo form_textarea('description', $project->description, ['placeholder' => 'Description']);
+echo form_input('name', $project->name, ['placeholder' => 'Name']);echo "<br>";
+echo form_textarea('description', $project->description, ['placeholder' => 'Description']);echo "<br>";
 echo form_submit('submit', 'Add');
 echo validation_errors();
 echo form_close();
 ?>
+<a href="<?=site_url('project/list/')?>">cancel</a>

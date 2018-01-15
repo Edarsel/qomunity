@@ -1,19 +1,17 @@
-
 <!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <title>Example page</title>
   <link rel = "stylesheet" type = "text/css" href="<?= css_url('style.css') ?>">
-  <link rel = "stylesheet" type = "text/css" href="../../../assets/css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <script src=" script.js"></script>
+  <script src="<?php echo js_url('script.js')?>"></script>
 </head>
 <body>
     <header>
         <h1>Qomunity</h1>
         <nav>
-            <a href="">Page0</a>
+            <a href="<?php echo site_url('Project/Add');?>">Page0</a>
             <a href="">Page1</a>
             <a href="">Page2</a>
             <a href="">Page3</a>
@@ -38,6 +36,14 @@
                  <br>
                  <button type="submit" form="form1" value="Submit">Submit</button>
             </form>
+            <?php echo form_open();
+                echo form_input('firstname', $example->firstname, ['placeholder' => 'Name']);
+                echo form_textarea('password', $example->password, ['placeholder' => 'password']);
+                echo form_submit('submit', 'Add');
+                echo validation_errors();
+                echo form_close();
+                ?>
+
         </div>
     </main>
 </body>

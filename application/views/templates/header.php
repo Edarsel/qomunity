@@ -2,7 +2,11 @@
 <!doctype html>
 <html>
 <head>
+<<<<<<< HEAD
 <title>Forum</title>
+=======
+<title>Example page</title>
+>>>>>>> master
     <meta charset="utf-8">
     <link rel = "stylesheet" type = "text/css" href="<?= css_url('style.css') ?>">
     <link rel = "stylesheet" type = "text/css" href="../../../assets/css/style.css">

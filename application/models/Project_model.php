@@ -20,4 +20,11 @@ class Project_model extends CI_Model {
 	{
 		return $this->db->get_where(self::TABLE, ['id' => $id])->row();
 	}
+<<<<<<< HEAD
+=======
+	public function getAll()
+	{
+		return $this->db->get(self::TABLE);
+	}
+>>>>>>> master
 }

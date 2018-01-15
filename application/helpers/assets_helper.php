@@ -14,3 +14,10 @@ if (!function_exists('css_url()')) {
         return asset_url('css/' . $css);
     }
 }
+
+if (!function_exists('js_url()')) {
+    function js_url($js = '')
+    {
+        return asset_url('js/' . $js);
+    }
+}
