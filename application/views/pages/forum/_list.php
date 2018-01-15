@@ -1,8 +1,8 @@
-<h2>Liste des Groupes</h2>
-<ul class="forum_group_container">
+<h2>Groupes</h2>
+<ul id="forum_group_container">
 <?php foreach($groups as $group){?>
-    <li class="forum_group">
-        <h3><?php echo $group->name ;?></h3>
-    </li>
+<li data-id="<?= xss_clean($group->id) ?>">
+    <?= xss_clean($group->name) ?>
+</li>
 <?php }?>
 </ul>

@@ -25,4 +25,9 @@ class Forum_message_model extends CI_Model
     {
         return $this->db->get_where(self::TABLE, ['id' => $id])->row();
     }
+
+    public function get_all($id)
+    {
+        return $this->db->get(self::TABLE, ['num_forum_group' => $id])->result();
+    }
 }

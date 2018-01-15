@@ -7,7 +7,10 @@
     <link rel = "stylesheet" type = "text/css" href="<?= css_url('style.css') ?>">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!-- TODO: ajouter après le merge du helper assets: <script src="forum.js" defer></script> -->
+    <script>
+        const BASE_URL = '<?= base_url() ?>'
+    </script>
+    <script src="<?= js_url('forum_messages.js') ?>" defer></script>
 </head>
 <body>
     <header>
