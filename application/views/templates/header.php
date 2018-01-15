@@ -2,11 +2,7 @@
 <!doctype html>
 <html>
 <head>
-<<<<<<< HEAD
-<title>Forum</title>
-=======
 <title>Example page</title>
->>>>>>> master
     <meta charset="utf-8">
     <link rel = "stylesheet" type = "text/css" href="<?= css_url('style.css') ?>">
     <link rel = "stylesheet" type = "text/css" href="../../../assets/css/style.css">
@@ -16,13 +12,15 @@
 <body>
     <header>
         <h1>Qomunity</h1>
+        <?php if(is_connected()){ ?>
         <nav>
-            <a href="<?php echo site_url('user/disconnect/'); ?>">Se déconnecter</a>
-            <a href="<?php echo site_url('user/profile/'); ?>">Mon profil</a>
-            <a href="">Page2</a>
+            <a href="<?= site_url('user/disconnect/'); ?>">Se déconnecter</a>
+            <a href="<?= site_url('user/profile/'); ?>">Mon profil</a>
+            <a href="<?=site_url('project/list/') ?>">Liste des projets</a>
             <a href="">Page3</a>
             <a href="">Page4</a>
             <a href="">Page5</a>
       </nav>
+      <?php } ?>
     </header>
     <main>

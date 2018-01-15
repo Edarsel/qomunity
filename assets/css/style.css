@@ -60,11 +60,7 @@ nav a:hover{
     text-decoration: underline;
 }
 
-<<<<<<< HEAD
-main form button[type=submit], input[type=submit]
-=======
 main form button[type=submit],main form input[type=submit]
->>>>>>> master
 {
     padding:5px 15px;
        background:rgba(43, 62, 222, 0.487);

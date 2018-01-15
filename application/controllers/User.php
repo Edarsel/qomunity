@@ -11,7 +11,7 @@ class User extends CI_Controller {
 
   public function index()
   {
-    if ($this->isConnected()){
+    if (is_connected()){
       redirect(['user', 'profile']);
     }else{
       redirect(['user', 'login']);
@@ -20,7 +20,7 @@ class User extends CI_Controller {
 
   public function profile()
   {
-    if ($this->isConnected()){
+    if (is_connected()){
       $this->load->view('templates/header');
       $this->load->view('pages/user/profile');
       $this->load->view('templates/footer');
@@ -30,20 +30,9 @@ class User extends CI_Controller {
 
   }
 
-  public function isConnected()
-  {
-    $isConnected = false;
-
-    //SI LA VARIABLE DE SESSION EXISTE => UN UTILISATEUR EST CONNECTE
-    if ($this->session->has_userdata('user')){
-      $isConnected = true;
-    }
-    return $isConnected;
-  }
-
   function register()
   {
-    if (!($this->isConnected())){
+    if (!(is_connected())){
       $userinfo = (object)[];
       $userinfo->username = trim($this->input->post('username'));
   		$userinfo->email = trim($this->input->post('email'));
@@ -88,7 +77,7 @@ class User extends CI_Controller {
   }
 
   public function login() {
-    if (!($this->isConnected())){
+    if (!(is_connected())){
       // create the data object
       $data = new stdClass();
 
@@ -173,7 +162,7 @@ class User extends CI_Controller {
   public function save_profile()
   {
 
-    if ($this->isConnected()){
+    if (is_connected()){
       $userinfo = (object)[];
       $userinfo->profilePict = trim($this->input->post('profilepict'));
       $userinfo->biography = trim($this->input->post('biography'));
@@ -225,7 +214,7 @@ class User extends CI_Controller {
 
   function reset_password()
   {
-    if ($this->isConnected()){
+    if (is_connected()){
       $userinfo = (object)[];
 
       $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[cpassword]');
