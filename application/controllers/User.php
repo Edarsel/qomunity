@@ -134,7 +134,7 @@ class User extends CI_Controller {
         {
           // login failed
           $data->error = 'Wrong username or password.';
-
+          $this->session->set_flashdata('error', 'Erreur lors de la connexion.');
           // send error to the view
           $this->load->view('templates/header');
           $this->load->view('pages/user/login', compact('userinfo'));
