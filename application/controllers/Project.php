@@ -36,11 +36,24 @@ class Project extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function view($id)
+	public function view($id = -1)
 	{
-		$project = $this->project_model->get($id);
+		if($id !== -1&&$project = $this->project_model->get($id)) {
+			$this->load->view('templates/header');
+			$this->load->view('pages/project/view', compact('project'));
+			$this->load->view('templates/footer');
+		} else
+		{
+			show_404();
+		}
+
+	}
+	public function list()
+	{
+		$projects = $this->project_model->getAll();
 		$this->load->view('templates/header');
-		$this->load->view('pages/project/view', compact('project'));
+		$this->load->view('pages/project/list',compact('projects'));
 		$this->load->view('templates/footer');
+
 	}
 }

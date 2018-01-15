@@ -15,9 +15,13 @@ class Project_model extends CI_Model {
 		$this->db->insert(self::TABLE, $project);
 		return $this->db->insert_id();
 	}
-	
+
 	public function get($id)
 	{
 		return $this->db->get_where(self::TABLE, ['id' => $id])->row();
+	}
+	public function getAll()
+	{
+		return $this->db->get(self::TABLE);
 	}
 }
