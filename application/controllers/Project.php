@@ -7,6 +7,8 @@ class Project extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('project_model');
+		not_connected_redirect();
+
 	}
 
 	public function index()
@@ -22,6 +24,8 @@ class Project extends CI_Controller {
 		$project = (object)[];
 		$project->name = trim($this->input->post('name'));
 		$project->description = trim($this->input->post('description'));
+		$project->link = trim($this->input->post('link'));
+		$project->num_user = $this->session->userdata('user')->id;
 
 		$this->form_validation->set_rules('name', 'Name', 'trim|required');
 		$this->form_validation->set_rules('description', 'Description', 'trim|required');
@@ -36,11 +40,26 @@ class Project extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function view($id)
+	public function view($id = -1)
 	{
-		$project = $this->project_model->get($id);
+		if($id !== -1&&$project = $this->project_model->get($id)) {
+		//	$projet->num_user
+			$this->load->view('templates/header');
+			$this->load->view('pages/project/view', compact('project'));
+			$this->load->view('templates/footer');
+		} else
+		{
+			show_404();
+		}
+
+	}
+
+	public function listProject()
+	{
+		$projects = $this->project_model->getAll();
 		$this->load->view('templates/header');
-		$this->load->view('pages/project/view', compact('project'));
+		$this->load->view('pages/project/list',compact('projects'));
 		$this->load->view('templates/footer');
+
 	}
 }

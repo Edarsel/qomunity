@@ -23,6 +23,13 @@ class Database extends CI_Controller {
 			],
 			'description' => [
 				'type' => 'TEXT'
+			],
+			'link'=>[
+				'type' => 'TEXT'
+			],
+			'num_user'=>[
+				'type' =>'INT',
+				'NULL'=>FALSE
 			]
 		]);
 		$this->dbforge->create_table('project');
@@ -36,23 +43,35 @@ class Database extends CI_Controller {
 			'email' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255
-		],
-			'name' => [
+			],
+			'username' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255
-		],
+			],
 			'password' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255
-		],
-			'num_group' => [
+			],
+			'biography' => [
+				'type' => 'TEXT',
+				'constraint' => 255
+			],
+			'profilePict' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255
+			],
+			'num_usersGroups' => [
 				'type' => 'INTEGER',	// Référence au champ 'id' de la table role
 				'constraint' => 1
-		],
-			'num_rank' => [
+			],
+			'num_ranks' => [
 				'type' => 'INTEGER',
 				'constraint' => 2
-		]
+			],
+			'num_status' => [
+				'type' => 'INTEGER',
+				'constraint' => 2
+			]
 		]);
 		$this->dbforge->create_table('users');
 
@@ -62,7 +81,7 @@ class Database extends CI_Controller {
 			'name' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255
-		]
+			]
 		]);
 		$this->dbforge->create_table('usersGroups');
 
@@ -72,9 +91,19 @@ class Database extends CI_Controller {
 			'name' => [
 				'type' => 'VARCHAR',
 				'constraint' => 40
-		]
-	]);
-	$this->dbforge->create_table('ranks');
+			]
+		]);
+		$this->dbforge->create_table('ranks');
+
+		$this->dbforge->drop_table('status', true);
+		$this->dbforge->add_field('id');
+		$this->dbforge->add_field([
+			'name' => [
+				'type' => 'VARCHAR',
+				'constraint' => 40
+			]
+		]);
+		$this->dbforge->create_table('status');
 	}
 
 	private function forum_group()
@@ -104,9 +133,6 @@ class Database extends CI_Controller {
 			'num_forum_group' => [ #foreign key
 				'type' => 'INT'
 			],
-			'num_user' => [ #foreign key
-				'type' => 'INT'
-			],
 			'date' => [
 				'type' => 'DATE'
 			],
@@ -119,62 +145,94 @@ class Database extends CI_Controller {
 
 	private function populate(){
 
-		// Table 'usersGroups'
+		// Table 'usersGroups' ======================================================
 		$data = array(
-		        'id' => 1,
-		        'name' => 'Utitilsateur'
+			'name' => 'Utilisateur'
 		);
 
 		$this->db->insert('usersGroups', $data);
 
 		$data = array(
-		        'id' => 2,
-		        'name' => 'Modérateur'
+			'name' => 'Modérateur'
 		);
 
 		$this->db->insert('usersGroups', $data);
 
 		$data = array(
-		        'id' => 3,
-		        'name' => 'Administrateur'
+			'name' => 'Administrateur'
 		);
 
 		$this->db->insert('usersGroups', $data);
 
-		// Table 'ranks'
+		// Table 'ranks' =================================================================
 		$data = array(
-		        'id' => 1,
-		        'name' => 'Débutant'
+			'name' => 'Débutant'
 		);
 
 		$this->db->insert('ranks', $data);
 
 		$data = array(
-						'id' => 2,
-						'name' => 'Connaisseur'
+			'name' => 'Connaisseur'
 		);
 
 		$this->db->insert('ranks', $data);
 
 		$data = array(
-						'id' => 3,
-						'name' => 'Avancé'
+			'name' => 'Avancé'
 		);
 
 		$this->db->insert('ranks', $data);
 
 		$data = array(
-						'id' => 4,
-						'name' => 'Expert'
+			'name' => 'Expert'
 		);
 
 		$this->db->insert('ranks', $data);
 
 		$data = array(
-						'id' => 5,
-						'name' => 'Grand Expert'
+			'name' => 'Grand Expert'
 		);
 
 		$this->db->insert('ranks', $data);
+
+
+		//INSERT pour la table status ==========================================================
+
+		$data = array(
+			'name' => 'Connecté'
+		);
+
+		$this->db->insert('status', $data);
+
+		$data = array(
+			'name' => 'Déconnecté'
+		);
+
+		$this->db->insert('status', $data);
+
+		$data = array(
+			'name' => 'Ne pas déranger'
+		);
+
+		$this->db->insert('status', $data);
+
+		$data = array(
+			'name' => 'Absent'
+		);
+
+		$this->db->insert('status', $data);
+
+
+		//INSERT pour la table status ==========================================================
+		$data = array(
+			'email' => 'admin@admin.com',
+			'username' => 'admin@admin.com',
+			'password' => '$2y$10$MCZpP447qkHT2Zdh03uXvepx/roJ/T7qVH76UVM.TIsFwCIJVi/Iu',
+			'num_usersGroups' => '3',
+			'num_ranks' => '5',
+			'num_status' => '2'
+		);
+
+		$this->db->insert('users', $data);
 	}
 }
