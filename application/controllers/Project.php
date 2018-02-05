@@ -39,11 +39,28 @@ class Project extends CI_Controller {
 		$this->load->view('pages/project/add', compact('project'));
 		$this->load->view('templates/footer');
 	}
+	private function AddMessageForm($id){
+		$this->load->helper('form');
+		$this->load->library('form_validation');
 
+		$message = (object)[];
+		$message->message = trim($this->input->post('message'));
+		$message->date = date("Y-m-d H:i:s");
+		$message->num_user = $this->session->userdata('user')->id;
+		$message->num_project = $id;
+
+		$this->form_validation->set_rules('message', 'Message', 'trim|required');
+
+		if($this->form_validation->run())
+		{
+			$id = $this->project_model->addMessage($message);
+		}
+	}
 	public function view($id = -1)
 	{
 		if($id !== -1&&$project = $this->project_model->get($id)) {
-		//	$projet->num_user
+			$this->AddMessageForm($id);
+			$project->messages=$this->project_model->get_Project_Messages($id);
 			$this->load->view('templates/header');
 			$this->load->view('pages/project/view', compact('project'));
 			$this->load->view('templates/footer');
