@@ -71,6 +71,7 @@ class Project extends CI_Controller {
 		}
 
 	}
+
 	public function listProject()
 	{
 		$projects = $this->project_model->getAll();
