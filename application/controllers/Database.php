@@ -67,7 +67,8 @@ class Database extends CI_Controller {
 			],
 			'username' => [
 				'type' => 'VARCHAR',
-				'constraint' => 255
+				'constraint' => 255,
+				'unique' => TRUE
 			],
 			'password' => [
 				'type' => 'VARCHAR',
