@@ -53,7 +53,7 @@ class Project extends CI_Controller {
 		}
 
 	}
-	public function list()
+	public function listProject()
 	{
 		$projects = $this->project_model->getAll();
 		$this->load->view('templates/header');
