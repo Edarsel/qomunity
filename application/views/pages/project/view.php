@@ -1,6 +1,6 @@
 <h2><?php echo xss_clean($project->name) ?></h2>
 <article>
-<label>Auteur:</label><a href="<?=site_url('user/view_profile_user/'.$project->num_user)?>"><?=xss_clean($project->user->username)?></a>
+<label>Auteur:</label><a href="<?=$project->Userlink?>"><?=xss_clean($project->user->username)?></a>
 <br />
 <label>Description:</label>	<?php echo xss_clean($project->description) ?>
 <br />

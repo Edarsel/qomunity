@@ -16,7 +16,7 @@
         <nav>
             <a href="<?= site_url('user/disconnect/'); ?>">Se déconnecter</a>
             <a href="<?= site_url('user/profile/'); ?>">Mon profil</a>
-            <a href="<?=site_url('project/list/') ?>">Liste des projets</a>
+            <a href="<?=site_url('project/listProject/') ?>">Liste des projets</a>
             <a href="">Page3</a>
             <a href="">Page4</a>
             <a href="">Page5</a>

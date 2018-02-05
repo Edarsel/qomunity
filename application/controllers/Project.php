@@ -59,6 +59,7 @@ class Project extends CI_Controller {
 	public function view($id = -1)
 	{
 		if($id !== -1&&$project = $this->project_model->get($id)) {
+			$project->Userlink=(xss_clean($project->user->id)==$this->session->userdata('user')->id)?site_url('user/profile/'):site_url('user/view_profile_user/'.$project->num_user);
 			$this->AddMessageForm($id);
 			$project->messages=$this->project_model->get_Project_Messages($id);
 			$this->load->view('templates/header');
@@ -70,7 +71,7 @@ class Project extends CI_Controller {
 		}
 
 	}
-	public function list()
+	public function listProject()
 	{
 		$projects = $this->project_model->getAll();
 		$this->load->view('templates/header');
