@@ -39,4 +39,4 @@
 
         </nav>
 </header>
-<main>
+<main class="m-5 p-5">
