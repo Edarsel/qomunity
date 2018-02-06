@@ -75,8 +75,7 @@ class Project extends CI_Controller {
 		$result;
 		preg_match($pattern,$message->message,$result);
 		foreach ($result as $key => $value) {
-			var_dump($value);
-			$idUser = $this->user_model->get_user_id_from_username(substr($value,0,1));
+			$idUser = $this->user_model->get_user_id_from_username(str_replace("@","",$value));
 
 			$replace = '<a href="'.site_url('user/view_profile_user/'.$idUser).'">'.$value.'</a>';
 			$message->message = str_replace($value,$replace,$message->message);
