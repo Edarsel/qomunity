@@ -7,7 +7,7 @@
 <label>Lien de téléchargement: </label><a href="<?=xss_clean($project->link)?>"><?=parse_url(xss_clean($project->link),PHP_URL_HOST)?></a>
 <br />
 <a href="<?=site_url('project/listProject/')?>">Retourner vers la liste des projets</a>
-<!-- ADD COMENT -->
+<!-- ADD COMMENT -->
 <?php
 echo form_open();
 echo form_textarea('message', '', ['placeholder' => 'Message']);echo "<br>";
@@ -21,13 +21,26 @@ echo form_close();
         <?php
            $id = (object)[];
            $id->project = $project->id;
+
            foreach($project->messages as $message){
+                $isUser = $message->user->id === $_SESSION['user']->id;
+                $linkAuthor = ($isUser) ? site_url('user/profile/') : site_url('user/view_profile_user/'.$message->user->id);
+
                 $id->message = $message->id;
                 //MESSAGE
+                //($isUser)?site_url('user/profile/'):site_url('user/view_profile_user/'.$message->user->id);
                 echo '<div id="individualMessage">';
-                echo '<p><a href="'.site_url('user/view_profile_user/'.$message->user->id).'"><b>'.$message->user->username.'</b></a> '.$message->date.'</p>';
+                echo '<p>';
+                echo '<a href="'.$linkAuthor.'">';
+                echo '<img width="32" src="'.$message->user->profilepict.'" alt="image de profile" /> ';
+                echo '<b>'.$message->user->username.'</b></a> '.$message->date.' ';
+                if ($isUser) {
+                  echo '<a href="'.site_url('project/remove_message_by_id/'.$id->project.'/'.$id->message).'">';
+                  echo 'Supprimer</a>';
+                }
+                echo '</p>';
                 echo '<p>'.$message->message.'</p>';
-                echo '<a href="'.site_url('project/remove_message_by_id/'.$id->message).'">Supprimer le message</a>';
+
 
                 echo '</div>';
             }

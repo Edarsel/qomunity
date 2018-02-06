@@ -11,6 +11,7 @@
     <script>
         const BASE_URL = '<?= base_url() ?>'
     </script>
+    <script src="<?= js_url('forum.js') ?>" defer></script>
     <script src="<?= js_url('forum_messages.js') ?>" defer></script>
     <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

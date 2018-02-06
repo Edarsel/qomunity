@@ -2,7 +2,7 @@
 <?php
   //Lien de la page dans une variable de session. Sert pour retourner à la page précédente.
   $this->session->set_userdata('previous_page', current_url());
-  //var_dump($this->session->userdata('user'));
+  // var_dump($this->session->userdata('user'));
  ?>
 
 <div>
