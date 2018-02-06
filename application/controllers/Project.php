@@ -12,13 +12,25 @@ class Project extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('project_model');
+		$this->load->model('forum_group_model');
 		not_connected_redirect();
 
 	}
 
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$projects = $this->project_model->getAll();
+		$groupes = $this->forum_group_model->get_all();
+		$arr = array(
+			"projects"=>$projects,
+			"groups"=>$groupes
+		);
+
+		$data = array_merge($projects,$groupes);
+		$this->load->view('templates/header');
+		$this->load->view('pages/project/index',compact('arr'));
+		$this->load->view('templates/footer');
+
 	}
 
 	public function add()
