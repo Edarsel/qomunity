@@ -32,7 +32,7 @@
                     <a class="nav-link text-light" href="<?= site_url('user/profile/'); ?>">Mon profil</a>
                     <a class="nav-link text-light" href="<?=site_url('project/listProject/') ?>">Liste des projets</a>
                     <a class="nav-link text-light" href="" >Page4</a>
-                    <a class="nav-link text-light" href="" >Page5</a>
+                    <a class="nav-link text-light" href="<?=site_url('project/index/') ?>" >Accueil</a>
                 </nav>
                 <?php } ?>
             </div>

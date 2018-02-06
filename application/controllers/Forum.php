@@ -56,7 +56,7 @@ public function view(/*$id*/){
 			echo json_encode($forum);
         }
     }
-
+//?????????
     public function display_group($id)
     {
         if (!$this->input->is_ajax_request()) {
