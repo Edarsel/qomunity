@@ -3,7 +3,7 @@
   //Lien de la page dans une variable de session. Sert pour retourner à la page précédente.
   $this->session->set_userdata('previous_page', current_url());
  ?>
-<form">
+
 <div class="form-group">
 <?php
 echo form_open();
@@ -19,7 +19,7 @@ echo form_label("Mot de passe : ", 'password');
 echo form_password('password','' ,['placeholder' => 'Mot de passe', 'class' => 'form-control']);
 echo "</div>";
 echo '<div class="form-group">';
-echo form_label("Vérification Mot de passe : ", 'password');
+echo form_label("Vérification Mot de passe : ", 'cpassword');
 echo form_password('cpassword', '',['placeholder'=> 'Vérification Mot de passe', 'class' => 'form-control']);
 echo "</div>";
 echo '<div class="form-group">';
@@ -28,4 +28,3 @@ echo validation_errors();
 echo form_close();
 ?>
 </div>
-</form>

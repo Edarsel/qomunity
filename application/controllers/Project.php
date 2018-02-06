@@ -13,6 +13,7 @@ class Project extends CI_Controller {
 		parent::__construct();
 		$this->load->model('project_model');
 		$this->load->model('forum_group_model');
+		$this->load->model('user_model');
 		not_connected_redirect();
 
 	}
@@ -68,6 +69,19 @@ class Project extends CI_Controller {
 
 		$message = (object)[];
 		$message->message = xss_clean(trim($this->input->post('message')));
+
+		// $pattern = '@{1}[\S]*';
+		$pattern = '/\@[\w]+/';
+		$result;
+		preg_match($pattern,$message->message,$result);
+		foreach ($result as $key => $value) {
+			var_dump($value);
+			$idUser = $this->user_model->get_user_id_from_username(substr($value,0,1));
+
+			$replace = '<a href="'.site_url('user/view_profile_user/'.$idUser).'">'.$value.'</a>';
+			$message->message = str_replace($value,$replace,$message->message);
+		}
+
 		$message->date = date("Y-m-d H:i:s");
 		$message->num_user = $this->session->userdata('user')->id;
 		$message->num_project = $id;

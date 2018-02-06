@@ -10,7 +10,8 @@
 <!-- ADD COMMENT -->
 <?php
 echo form_open();
-echo form_textarea('message', '', ['placeholder' => 'Message']);echo "<br>";
+echo form_textarea('message', '', ['placeholder' => 'Message', 'maxlength' => 500, 'rows' => 5, 'cols' => 5]);
+echo "<br>";
 echo form_submit('submit', 'Envoyer');
 echo validation_errors();
 echo form_close();
@@ -31,7 +32,7 @@ echo form_close();
                 echo '<div id="individualMessage">';
                 echo '<p>';
                 echo '<a href="'.$linkAuthor.'">';
-                echo '<img width="32" src="'.$message->user->profilepict.'" alt="image de profile" /> ';
+                echo '<img width="32" src="'.$message->user->profilepict.'" alt="" /> ';
                 echo '<b>'.$message->user->username.'</b></a> '.$message->date.' ';
                 if ($isUser) {
                   echo '<a href="'.$linkDeletion.'">';

@@ -28,11 +28,13 @@
             <div class="container justify-content-end">
                 <?php if(is_connected()){ ?>
                 <nav class="nav nav-pills">
-                    <a class="nav-link text-light" href="<?= site_url('user/disconnect/'); ?>">Se déconnecter</a>
-                    <a class="nav-link text-light" href="<?= site_url('user/profile/'); ?>">Mon profil</a>
-                    <a class="nav-link text-light" href="<?=site_url('project/listProject/') ?>">Liste des projets</a>
-                    <a class="nav-link text-light" href="" >Page4</a>
                     <a class="nav-link text-light" href="<?=site_url('project/index/') ?>" >Accueil</a>
+                    <a class="nav-link text-light" href="<?=site_url('project/listProject/') ?>">Liste des projets</a>
+                    <a class="nav-link text-light" href="<?=site_url('forum/view/') ?>" >Fauforum</a>
+                    <a class="nav-link text-light" href="<?= site_url('user/profile/'); ?>">
+                      <img src="<?php echo xss_clean($this->session->userdata('user')->profilepict) ?>" alt="" class="rounded float-left rounded-circle" style="width:30px;height:30px; margin-right:5px;" />Profil</a>
+                    <a class="nav-link text-light" href="<?= site_url('user/disconnect/'); ?>">Se déconnecter</a>
+
                 </nav>
                 <?php } ?>
             </div>

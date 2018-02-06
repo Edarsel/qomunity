@@ -9,7 +9,7 @@
          <div class="col-md-12">
              <div class="d-flex justify-content-center">
                  <div class="col-md-6">
-                 <form><h1>Qomunity - Connexion</h1>
+                 <h1>Qomunity - Connexion</h1>
                      <div class="form-group">
                     <?php
                     echo form_open('user/login');
@@ -31,7 +31,7 @@
 
                     </div>
                     <a href="<?= site_url('user/register/'); ?>">Se créer un compte</a>
-                </form>
+                
                 </div>
             <div>
         </div>

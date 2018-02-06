@@ -58,7 +58,7 @@ class User extends CI_Controller {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $userInfo = array('username'=>$username, 'email'=>$email,'password'=>password_hash($password, PASSWORD_DEFAULT), 'num_usersGroups'=>1,'num_ranks'=>1);
+        $userInfo = array('username'=>ucfirst($username), 'email'=>$email,'password'=>password_hash($password, PASSWORD_DEFAULT), 'num_usersGroups'=>1,'num_ranks'=>1);
 
         $id = $this->user_model->add($userInfo);
         //Change le status de l'utilisateur en connecté

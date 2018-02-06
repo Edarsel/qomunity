@@ -20,8 +20,8 @@
                  echo "Statut : " . xss_clean($this->session->userdata('user')->status_name);
                  echo "<br>Groupe : " . xss_clean($this->session->userdata('user')->usergroup_name);
                  echo "<br>Email : " . xss_clean($this->session->userdata('user')->email);
-                 echo "<br>Biographie : " . xss_clean($this->session->userdata('user')->biography);
-                 echo "<br>";
+                 echo "<br>Biographie : <div>" . xss_clean($this->session->userdata('user')->biography);
+                 echo "</div><br>";
                  ?>
                  <a href="<?php echo site_url('user/reset_password/'); ?>">Changer mot de passe</a>
                  <div class="d-flex flex-row-reverse">
