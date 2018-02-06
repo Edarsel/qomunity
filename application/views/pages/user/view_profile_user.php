@@ -6,7 +6,7 @@
  ?>
 
 <div>
-  <img src="<?php echo xss_clean($userinfo->profilepict) ?>" alt="Image de profil" height="200" width="200" />
+  <img src="<?php echo xss_clean($userinfo->profilepict) ?>" alt="Aucune image de profil" height="200" width="200" />
   <p>
     <h3><?php echo xss_clean($userinfo->username); ?></h3>
     <?php echo "Groupe : " . xss_clean($userinfo->usergroup_name); ?>

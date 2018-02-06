@@ -7,7 +7,10 @@
 <?php
 echo form_open('user/login');
 echo form_label("Adresse email : ", 'email');
-echo form_input('email', $userinfo->email ,['placeholder' => 'Adresse mail']);
+echo form_input('email', (isset($userinfo->email)) ? $userinfo->email : $userinfo->username ,['placeholder' => 'Adresse mail']);
+if (isset($data)) {
+  if (isset($data->error)) echo $data->error;
+}
 echo form_label("Mot de passe : ", 'password');
 echo form_password('password', '',['placeholder' => 'Mot de passe']);
 echo form_submit('submit', 'Se connecter');

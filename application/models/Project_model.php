@@ -39,12 +39,18 @@ class Project_model extends CI_Model {
 	}
 
 	public function get_Project_Messages($id){
+		$this->db->order_by('date','desc');
 		$messages = $this->db->get_where(self::TABLE_MESSAGE, ['num_project' => $id])->result();
 		for ($i = 0; $i < sizeof($messages); $i++)
 		{
 			$messages[$i] = $this->load_user($messages[$i]);
 		}
 		return $messages;
+	}
+
+	public function remove_Project_Messages($id){
+		$this->db->where('id', $id);
+		$this->db->delete(self::TABLE_MESSAGE);
 	}
 
 	public function addMessage($message){

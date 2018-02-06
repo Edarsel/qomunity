@@ -6,7 +6,7 @@
 <br />
 <label>Lien de téléchargement: </label><a href="<?=xss_clean($project->link)?>"><?=parse_url(xss_clean($project->link),PHP_URL_HOST)?></a>
 <br />
-<a href="<?=site_url('project/list/')?>">Retourner vers la liste des projets</a>
+<a href="<?=site_url('project/listProject/')?>">Retourner vers la liste des projets</a>
 <!-- ADD COMENT -->
 <?php
 echo form_open();
@@ -19,10 +19,16 @@ echo form_close();
 <!-- MESSAGES LIST -->
     <div id="messages">
         <?php
+           $id = (object)[];
+           $id->project = $project->id;
            foreach($project->messages as $message){
+                $id->message = $message->id;
+                //MESSAGE
                 echo '<div id="individualMessage">';
-                echo '<p><b>'.$message->user->username.'</b> '.$message->date.'</p>';
+                echo '<p><a href="'.site_url('user/view_profile_user/'.$message->user->id).'"><b>'.$message->user->username.'</b></a> '.$message->date.'</p>';
                 echo '<p>'.$message->message.'</p>';
+                echo '<a href="'.site_url('project/remove_message_by_id/'.$id->message).'">Supprimer le message</a>';
+
                 echo '</div>';
             }
         //print_r($project->messages);

@@ -13,7 +13,7 @@ echo form_input('username',$userinfo->username,['placeholder' => "Nom d'utilisat
 echo form_label("Mot de passe : ", 'password');
 echo form_password('password','' ,['placeholder' => 'Mot de passe']);
 echo form_password('cpassword', '',['placeholder'=> 'Vérification Mot de passe']);
-echo form_submit('submit', 'Register');
+echo form_submit('submit', 'Enregistrer');
 echo validation_errors();
 echo form_close();
 ?>

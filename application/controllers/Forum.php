@@ -8,9 +8,9 @@ class Forum extends CI_Controller
     public function __construct(){
         parent::__construct();
         $this->load->model("forum_group_model");
-        //$this->load->model("forum_message_model");
+        $this->load->model("forum_message_model");
     }
-    // Charge la view qui permet d'ajoute les groupes dans la base de donnée
+    // Charge la view qui permet d'ajouter les groupes dans la base de donnée
     public function add(){
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -31,31 +31,40 @@ class Forum extends CI_Controller
         $this->load->view('templates/footer');
     }
     //
-    public function view($id){
+public function view(/*$id*/){
         $groups = $this->forum_group_model->get_all();
         $list = $this->load->view('pages/forum/_list', compact('groups'), true);
-        $group = $this->forum_group_model->get($id);
+        //$group = $this->forum_group_model->get($id);
+        //$messages = $this->load->view('pages/forum/_messages', compact('group'), true);
+
         $this->load->view('templates/header');
-        $this->load->view('pages/forum/view', compact('group', 'list'));
+        $this->load->view('pages/forum/view', compact(/*'messages', */'list'));
         $this->load->view('templates/footer');
     }
-
     //
     public function send_message(){
         if (!$this->input->is_ajax_request()) {
             show_404();
         }
-        $this->load->library('form_validation');
 
         $forum = (object)[];
         $forum->message = trim($this->input->post('message'));
+        $forum->num_forum_group = trim($this->input->post('group'));
 
-        $this->form_validation->set_rules('message', 'Message', 'trim|required');
-        if ($this->form_validation->run()) {
-            $id = $this->forum_message_model->add($forum_message);
+        if ($forum->message != '' && $forum->num_forum_group > 0) {
+            $id = $this->forum_message_model->add($forum);
 			echo json_encode($forum);
         }
     }
 
+    public function display_group($id)
+    {
+        if (!$this->input->is_ajax_request()) {
+            show_404();
+        }
+        $this->load->helper('form');
+        $messages = $this->forum_message_model->get_all($id);
 
+        $this->load->view('pages/forum/_messages', compact('messages'));
+    }
 }

@@ -1,5 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+// You are not welcoming me, now you will have to pay the consequences of your acts, mortal.
+// Be aware that you are being watched
+// We will never get Jasmin again
+//  You have been warned.
+
 
 class Project extends CI_Controller {
 
@@ -39,6 +44,12 @@ class Project extends CI_Controller {
 		$this->load->view('pages/project/add', compact('project'));
 		$this->load->view('templates/footer');
 	}
+
+	public function remove_message_by_id($id){
+		$this->project_model->remove_Project_Messages($id);
+		//redirect(['project', 'view', $id->project]);
+	}
+
 	private function AddMessageForm($id){
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -56,6 +67,7 @@ class Project extends CI_Controller {
 			$id = $this->project_model->addMessage($message);
 		}
 	}
+
 	public function view($id = -1)
 	{
 		if($id !== -1&&$project = $this->project_model->get($id)) {
@@ -71,6 +83,7 @@ class Project extends CI_Controller {
 		}
 
 	}
+
 	public function listProject()
 	{
 		$projects = $this->project_model->getAll();
