@@ -1,5 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+// You are not welcoming me, now you will have to pay the consequences of your acts, mortal.
+// Be aware that you are being watched
+// We will never get Jasmin again
+//  You have been warned.
+
 
 class Project extends CI_Controller {
 
