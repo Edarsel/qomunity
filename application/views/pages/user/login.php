@@ -14,7 +14,10 @@
                     <?php
                     echo form_open('user/login');
                     echo form_label("Adresse email : ", 'email');
-                    echo form_input('email', $userinfo->email ,['placeholder' => 'Adresse mail', 'class' => 'form-control']);
+                    echo form_input('email', (isset($userinfo->email)) ? $userinfo->email : $userinfo->username ,['placeholder' => 'Adresse mail', 'class' => 'form-control']);
+                    if (isset($data)) {
+                      if (isset($data->error)) echo $data->error;
+                    }
                     echo "</div>";
                     echo '<div class="form-group">';
                     echo form_label("Mot de passe : ", 'password');

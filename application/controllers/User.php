@@ -38,7 +38,7 @@ class User extends CI_Controller {
   		$userinfo->email = trim($this->input->post('email'));
 
       // set form validation rules
-      $this->form_validation->set_rules('username', 'Username','trim|required');
+      $this->form_validation->set_rules('username', 'Username','trim|required|is_unique[users.username]');
       $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
       $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[cpassword]');
       $this->form_validation->set_rules('cpassword', 'Check password', 'trim|required');
@@ -80,13 +80,26 @@ class User extends CI_Controller {
     if (!(is_connected())){
       // create the data object
       $data = new stdClass();
+      //$isEmail = false;
 
       // load form helper and validation library
       $this->load->helper('form');
       $this->load->library('form_validation');
 
       $userinfo = (object)[];
-  		$userinfo->email = trim($this->input->post('email'));
+
+      $tempEmailField = trim($this->input->post('email'));
+
+      // to validate the email
+      if (valid_email($tempEmailField))
+      {
+        //echo 'email is valid';
+        $userinfo->email = $tempEmailField;
+      }else{
+        // if the email isn't valid, we will then check the username
+        //echo 'email is not valid';
+        $userinfo->username = $tempEmailField;
+      }
 
       // set validation rules
       $this->form_validation->set_rules("email", "Email-ID", "trim|required|xss_clean");
@@ -102,12 +115,12 @@ class User extends CI_Controller {
       } else {
 
         // set variables from the form
-        $email = $this->input->post('email');
+        $emailUsername = $this->input->post('email');
         $password = $this->input->post('password');
 
-        if ($this->user_model->resolve_user_login($email, $password)) {
+        if ($this->user_model->resolve_user_login($emailUsername, $password)) {
 
-          $user_id = $this->user_model->get_user_id_from_username($email);
+          $user_id = $this->user_model->get_user_id_from_username($emailUsername);
           //Change le status de l'utilisateur en connecté
           $this->user_model->update_user_status($user_id,1);
           //Récupération des info utilisateur
@@ -123,10 +136,12 @@ class User extends CI_Controller {
         {
           // login failed
           $data->error = 'Wrong username or password.';
+          $data->userinfo = $userinfo;
           $this->session->set_flashdata('error', 'Erreur lors de la connexion.');
           // send error to the view
           $this->load->view('templates/header');
-          $this->load->view('pages/user/login', compact('userinfo'));
+          $this->load->view('pages/user/login', compact('userinfo', 'data'));
+          // $this->load->view('pages/user/login', compact('data'));
           $this->load->view('templates/footer');
 
         }

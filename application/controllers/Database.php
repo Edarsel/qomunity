@@ -9,6 +9,7 @@ class Database extends CI_Controller {
 		$this->forum_group();
 		$this->forum_message();
 		$this->user();
+		$this->project_message();
 		$this->populate();
 	}
 	private function project()
@@ -28,11 +29,31 @@ class Database extends CI_Controller {
 				'type' => 'TEXT'
 			],
 			'num_user'=>[
-				'type' =>'INT',
-				'NULL'=>FALSE
+				'type' =>'INT'
 			]
 		]);
 		$this->dbforge->create_table('project');
+	}
+	private function project_message(){
+		$this->load->dbforge();
+		$this->dbforge->drop_table('project_message', true);
+		$this->dbforge->add_field('id');
+		$this->dbforge->add_field([
+			'message'=>[
+				'type'=>"TEXT",
+			 	'constraint'=>500
+			],
+			'date' =>[
+				'type'=>'DATETIME'
+			],
+			'num_user'=>[
+				'type'=>'INT'
+			],
+			'num_project'=>[
+				'type'=>'INT'
+			]
+		]);
+		$this->dbforge->create_table('project_message');
 	}
 
 	private function user()
@@ -46,7 +67,8 @@ class Database extends CI_Controller {
 			],
 			'username' => [
 				'type' => 'VARCHAR',
-				'constraint' => 255
+				'constraint' => 255,
+				'unique' => TRUE
 			],
 			'password' => [
 				'type' => 'VARCHAR',
