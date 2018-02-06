@@ -21,21 +21,20 @@ echo form_close();
         <?php
            $id = (object)[];
            $id->project = $project->id;
-
            foreach($project->messages as $message){
-                $isUser = $message->user->id === $_SESSION['user']->id;
-                $linkAuthor = ($isUser) ? site_url('user/profile/') : site_url('user/view_profile_user/'.$message->user->id);
-
                 $id->message = $message->id;
+                $isUser = $message->user->id === $this->session->userdata('user')->id;
+                $linkAuthor = ($isUser) ? site_url('user/profile/') : site_url('user/view_profile_user/'.$message->user->id);
+                $linkDeletion = site_url('project/remove_message_by_id/'.$id->project.'/'.$id->message);
+
                 //MESSAGE
-                //($isUser)?site_url('user/profile/'):site_url('user/view_profile_user/'.$message->user->id);
                 echo '<div id="individualMessage">';
                 echo '<p>';
                 echo '<a href="'.$linkAuthor.'">';
                 echo '<img width="32" src="'.$message->user->profilepict.'" alt="image de profile" /> ';
                 echo '<b>'.$message->user->username.'</b></a> '.$message->date.' ';
                 if ($isUser) {
-                  echo '<a href="'.site_url('project/remove_message_by_id/'.$id->project.'/'.$id->message).'">';
+                  echo '<a href="'.$linkDeletion.'">';
                   echo 'Supprimer</a>';
                 }
                 echo '</p>';

@@ -55,7 +55,7 @@ class Project extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$message = (object)[];
-		$message->message = trim($this->input->post('message'));
+		$message->message = xss_clean(trim($this->input->post('message')));
 		$message->date = date("Y-m-d H:i:s");
 		$message->num_user = $this->session->userdata('user')->id;
 		$message->num_project = $id;
