@@ -1,6 +1,6 @@
 <h2><?php echo xss_clean($project->name) ?></h2>
 <article>
-<label>Auteur:</label><a href="<?=$project->Userlink?>"><?=xss_clean($project->user->username)?></a>
+<label>Auteur:</label><a href="<?=site_url('user/view_profile_user/'.$project->user->id)?>"><?=xss_clean($project->user->username)?></a>
 <br />
 <label>Description:</label>	<?php echo xss_clean($project->description) ?>
 <br />
@@ -25,14 +25,15 @@ echo form_close();
            foreach($project->messages as $message){
                 $id->message = $message->id;
                 $isUser = $message->user->id === $this->session->userdata('user')->id;
-                $linkAuthor = ($isUser) ? site_url('user/profile/') : site_url('user/view_profile_user/'.$message->user->id);
-                $linkDeletion = site_url('project/remove_message_by_id/'.$id->project.'/'.$id->message);
+                //$linkAuthor = ($isUser) ? site_url('user/profile/') : site_url('user/view_profile_user/'.$message->user->id);
+                $linkDeletion = site_url('project/removeMessageById/'.$id->project.'/'.$id->message);
 
                 //MESSAGE
                 echo '<div id="individualMessage">';
                 echo '<p>';
-                echo '<a href="'.$linkAuthor.'">';
-                echo '<img width="32" src="'.$message->user->profilepict.'" alt="" /> ';
+                echo '<a href="'.site_url('user/view_profile_user/'.$message->user->id).'">';
+                echo '<img src="'.$message->user->profilepict.'" alt="" class="rounded float-left rounded-circle" style="width:30px;height:30px; margin-right:5px;" />';
+                //echo '<img width="32" src="'.$message->user->profilepict.'" alt="" /> ';
                 echo '<b>'.$message->user->username.'</b></a> '.$message->date.' ';
                 if ($isUser) {
                   echo '<a href="'.$linkDeletion.'">';

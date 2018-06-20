@@ -58,7 +58,7 @@ class Project extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function remove_message_by_id($project, $message){
+	public function removeMessageById($project, $message){
 		$this->project_model->remove_Project_Messages($message);
 		redirect(['project', 'view', $project]);
 	}

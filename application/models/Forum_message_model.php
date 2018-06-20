@@ -28,6 +28,24 @@ class Forum_message_model extends CI_Model
 
     public function get_all($id)
     {
-        return $this->db->get(self::TABLE, ['num_forum_group' => $id])->result();
+      $this->db->order_by('date','desc');
+  		$messages = $this->db->get_where(self::TABLE, ['num_forum_group' => $id])->result();
+  		for ($i = 0; $i < sizeof($messages); $i++)
+  		{
+  			$messages[$i] = $this->load_user($messages[$i]);
+  		}
+  		return $messages;
     }
+
+    public function remove_Forum_Messages($id){
+  		$this->db->where('id', $id);
+  		$this->db->delete(self::TABLE);
+  	}
+
+    private function load_user($project)
+  	{
+  		$this->load->model('user_model');
+  		$project->user = $this->user_model->get_user($project->num_user);
+  		return $project;
+  	}
 }

@@ -2,6 +2,7 @@
 
 <div class="form-group" style="margin: 5px; margin-bottom:15px">
     <?php
+    echo form_open();
     $nom = array(
         'type'          =>'text',
         'class'         =>'form-control',
@@ -10,10 +11,10 @@
         'placeholder'   => 'Nom de votre projet'
     );
 
-    echo form_open();
+
     echo form_input($nom);
     // echo validation_errors();
-    echo form_close();
+
     ?>
 
 </div>
@@ -30,10 +31,10 @@
         'rows'          => '5'
     );
 
-    echo form_open();
+
     echo form_textarea($description);
     // echo validation_errors();
-    echo form_close();
+
     ?>
 
 </div>

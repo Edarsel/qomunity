@@ -156,7 +156,7 @@ class Database extends CI_Controller {
 				'type' => 'INT'
 			],
 			'date' => [
-				'type' => 'DATE'
+				'type' => 'DATETIME'
 			],
 			'message' => [
 				'type' => 'TEXT'

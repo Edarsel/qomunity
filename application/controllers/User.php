@@ -30,6 +30,8 @@ class User extends CI_Controller {
 
   }
 
+
+
   function register()
   {
     if (!(is_connected())){
@@ -215,15 +217,27 @@ class User extends CI_Controller {
     }
   }
 
-  public function view_profile_user($id_user){
-    $userinfo = $this->user_model->get_user($id_user);
-    if ($userinfo){
-    $this->load->view('templates/header');
-    $this->load->view('pages/user/view_profile_user',compact('userinfo'));
-    $this->load->view('templates/footer');
-    }else {
-      //Retour page précédente car user n'existe pas
-      redirect($this->session->userdata('previous_page'), 'refresh');
+  public function view_profile_user($id_user = "0"){
+    if ($id_user == 0 || $id_user == $this->session->userdata('user')->id)
+    {
+      if (is_connected()){
+        $this->load->view('templates/header');
+        $this->load->view('pages/user/profile');
+        $this->load->view('templates/footer');
+      }else{
+        redirect(['user', 'login']);
+      }
+    }
+    else {
+      $userinfo = $this->user_model->get_user($id_user);
+      if ($userinfo){
+      $this->load->view('templates/header');
+      $this->load->view('pages/user/view_profile_user',compact('userinfo'));
+      $this->load->view('templates/footer');
+      }else {
+        //Retour page précédente car user n'existe pas
+        redirect($this->session->userdata('previous_page'), 'refresh');
+      }
     }
   }
 

@@ -31,7 +31,7 @@
                     <a class="nav-link text-light" href="<?=site_url('project/index/') ?>" >Accueil</a>
                     <a class="nav-link text-light" href="<?=site_url('project/listProject/') ?>">Liste des projets</a>
                     <a class="nav-link text-light" href="<?=site_url('forum/view/') ?>" >Fauforum</a>
-                    <a class="nav-link text-light" href="<?= site_url('user/profile/'); ?>">
+                    <a class="nav-link text-light" href="<?= site_url('user/view_profile_user/'); ?>">
                       <img src="<?php echo xss_clean($this->session->userdata('user')->profilepict) ?>" alt="" class="rounded float-left rounded-circle" style="width:30px;height:30px; margin-right:5px;" />Profil</a>
                     <a class="nav-link text-light" href="<?= site_url('user/disconnect/'); ?>">Se déconnecter</a>
 

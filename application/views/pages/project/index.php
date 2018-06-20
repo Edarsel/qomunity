@@ -18,7 +18,7 @@
 <?php
 foreach ($arr['groups'] as $value) {
     $groupeDescr=(strlen($value->description)>45)?substr($value->description, 0, 45).'...':$value->description;
-    echo '<article><h2><a href='.site_url('Forum/display_group/'.$value->id).'>'.$value->name.'</a></h2><div>'.$groupeDescr.'</div></article>'; //TODO corriger le liens pour afficher uniquement 1 groupe
+    echo '<article><h2><a href='.site_url('Forum/displayGroup/'.$value->id).'>'.$value->name.'</a></h2><div>'.$groupeDescr.'</div></article>'; //TODO corriger le liens pour afficher uniquement 1 groupe
 }
  ?>
 </div>
